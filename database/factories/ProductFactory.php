@@ -13,11 +13,13 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Client::class, function (Faker $faker) {
+$factory->define(App\Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'email' => ($faker->email),
-        'number' => ($faker->randomNumber(5) . $faker->randomNumber(5)),
-        'ip_registered' => ($faker->ipv4),
+        'desc' => $faker->realText(),
+        'price' => $faker->randomFloat(2, 100, 1000),
+        'currency' => $faker->currencyCode,
+        'full_file' => '#',
+        'trial_file' => '#',
     ];
 });

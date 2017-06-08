@@ -30,14 +30,18 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name') }}
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    @if(Auth::check())
+                        <li><a href="/admin/products">Products</a></li>
+                        <li><a href="/admin/orders">Orders</a></li>
+                        <li><a href="/admin/clients">Clients</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

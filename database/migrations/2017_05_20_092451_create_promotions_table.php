@@ -21,7 +21,7 @@ class CreatePromotionsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

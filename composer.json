@@ -1,9 +1,10 @@
 {
-  "name": "laravel/laravel",
-  "description": "The Laravel Framework.",
+  "name": "jnexsoft/labcare",
+  "description": "The framework allows you to ",
   "keywords": [
-    "framework",
-    "laravel"
+    "lab",
+    "medical",
+    "lab care"
   ],
   "license": "MIT",
   "type": "project",

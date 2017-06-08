@@ -14,6 +14,6 @@ class ClientController extends Controller
 
     public function show()
     {
-        return view('admin.clients', ['clients' => Client::all()]);
+        return view('admin.clients', ['clients' => Client::with('licences.product')->orderByDesc('id')->paginate(10)]);
     }
 }

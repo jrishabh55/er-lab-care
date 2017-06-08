@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $appends = [
+        'value'
+    ];
+
+    public function getValueAttribute()
+    {
+        return $this->price . " " . $this->currecny;
+    }
+
     public function promotions()
     {
         return $this->hasMany('App\Promotion');

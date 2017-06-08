@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return redirect('/admin/dashboard');
 });
@@ -18,13 +20,13 @@ Route::get('home', function () {
     return redirect('/admin/dashboard');
 });
 
-Auth::routes();
-
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin::',
+    'middleware' => 'auth'
 ], function () {
     Route::get('dashboard', 'Admin\DashboardController@dashboard');
     Route::get('clients', 'Admin\ClientController@show');
     Route::get('orders', 'Admin\OrderController@show');
+    Route::get('products', 'Admin\ProductController@show');
 });
