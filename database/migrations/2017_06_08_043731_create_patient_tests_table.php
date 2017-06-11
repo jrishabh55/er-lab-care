@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePatientReportsTable extends Migration
+class CreatePatientTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreatePatientReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('patient_reports', function (Blueprint $table) {
+        Schema::create('patient_tests', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('patient_id', false, true);
+            $table->integer('patient_report_id', false, true);
+            $table->integer('test_id', false, true);
+            $table->float('value');
             $table->float('price');
-            $table->float('discount');
-            $table->string('reference_by')->nullable();
 
             $table->timestamps();
 
-            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->foreign('patient_report_id')->refereces('id')->on('patient_reports');
         });
     }
 
@@ -33,6 +33,6 @@ class CreatePatientReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_reports');
+        Schema::dropIfExists('patient_tests');
     }
 }

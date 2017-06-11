@@ -16,6 +16,13 @@ class CreatePatientsTable extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('lab_id', false, true);
+            $table->string('name');
+            $table->date('dob');
+            $table->enum('gender', [0, 1, -1]);
+            $table->longText('mobile');
+            $table->longText('address')->nullable();
+            $table->longText('email');
+            $table->string('referred_by');
             $table->timestamps();
         });
     }
