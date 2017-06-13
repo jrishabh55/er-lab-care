@@ -22,7 +22,7 @@ class CreatePatientTestsTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('patient_report_id')->refereces('id')->on('patient_reports');
+            $table->foreign('patient_report_id')->references('id')->on('patient_reports');
         });
     }
 

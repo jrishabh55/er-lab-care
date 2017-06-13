@@ -15,7 +15,6 @@ use Faker\Generator as Faker;
 
 $factory->define(App\PatientReport::class, function (Faker $faker) {
     return [
-        'patient_id' => random_int(1, 20),
         'price' => $faker->randomFloat(2, 200, 5000),
         'discount' => $faker->randomFloat(0, 10, 200)
     ];

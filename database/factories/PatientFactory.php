@@ -18,8 +18,8 @@ $factory->define(App\Patient::class, function (Faker $faker) {
         'lab_id' => random_int(0, 50),
         'name' => $faker->name,
         'dob' => $faker->date(),
-        'gender' => random_int(-1, 1),
-        'mobile' => $faker->phoneNumber,
+        'gender' => $faker->boolean,
+        'number' => $faker->phoneNumber,
         'email' => $faker->email,
     ];
 });

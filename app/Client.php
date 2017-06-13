@@ -15,10 +15,6 @@ class Client extends Model
         return $this->hasMany('App\Licence');
     }
 
-    /**
-     * Setting up query mutator and extractors
-     */
-
     public function getEmailAttribute($value)
     {
         return decrypt($value);
@@ -32,6 +28,11 @@ class Client extends Model
     public function getIpRegisteredAttribute($value)
     {
         return decrypt($value);
+    }
+
+    public function getGenderAttribute($value)
+    {
+        return $value ? 'Male' : 'Female';
     }
 
     public function setIpRegisteredAttribute($value)
@@ -48,4 +49,5 @@ class Client extends Model
     {
         return $this->attributes['number'] = encrypt($value);
     }
+
 }

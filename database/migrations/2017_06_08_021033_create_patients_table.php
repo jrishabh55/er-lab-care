@@ -18,11 +18,11 @@ class CreatePatientsTable extends Migration
             $table->integer('lab_id', false, true);
             $table->string('name');
             $table->date('dob');
-            $table->enum('gender', [0, 1, -1]);
-            $table->longText('mobile');
+            $table->boolean('gender');
+            $table->longText('number');
             $table->longText('address')->nullable();
             $table->longText('email');
-            $table->string('referred_by');
+            $table->string('referred_by')->nullable();
             $table->timestamps();
         });
     }
