@@ -11,14 +11,14 @@ class Product extends Model
         'value'
     ];
 
+    public function promotions()
+    {
+        return $this->hasMany(Promotion::class);
+    }
+
     public function getValueAttribute()
     {
         return $this->price . " " . $this->currecny;
-    }
-
-    public function promotions()
-    {
-        return $this->hasMany('App\Promotion');
     }
 
     public function isApplicable(Promotion $promotion)

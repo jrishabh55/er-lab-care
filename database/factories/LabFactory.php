@@ -16,6 +16,5 @@ use Faker\Generator as Faker;
 $factory->define(App\Lab::class, function (Faker $faker) {
     return [
         'name' => $faker->userName,
-        'client_id' => random_int(1, 20),
     ];
 });

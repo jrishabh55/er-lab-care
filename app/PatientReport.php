@@ -12,11 +12,11 @@ class PatientReport extends Model
 
     public function patient()
     {
-        return $this->belongsTo('App\Patient');
+        return $this->belongsTo(Patient::class);
     }
 
     public function tests()
     {
-        return $this->hasMany('App\PatientTest');
+        return $this->hasMany(PatientTest::class);
     }
 }

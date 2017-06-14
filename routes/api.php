@@ -18,7 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'as' => 'api::'
+    'as' => 'api::',
+    'middleware' => 'auth:client_api'
 ], function () {
+    Route::get('patient/{patient}', "Api\PatientController@patient")->middleware('patient_ownership');
+    Route::get('patient/{patient}/reports', "Api\PatientController@reports")->middleware('patient_ownership');
     Route::get('patients', "Api\PatientController@listAll");
 });

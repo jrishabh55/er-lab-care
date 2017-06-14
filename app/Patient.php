@@ -9,17 +9,22 @@ class Patient extends Model
 {
 
     protected $hidden = [
-        'id', 'updated_at',
+        'id', 'updated_at', 'client_id', 'lab_id'
     ];
+
+    public function lab()
+    {
+        return $this->belongsTo(Lab::class);
+    }
 
     public function reports()
     {
-        return $this->hasMany('App\PatientReport');
+        return $this->hasMany(PatientReport::class);
     }
 
     public function tests()
     {
-        return $this->hasManyThrough('App\PatientTest', 'App\PatientReport');
+        return $this->hasManyThrough(PatientTest::class, PatientReport::class);
     }
 
     public function setNumberAttribute($value)
@@ -47,6 +52,5 @@ class Patient extends Model
     {
         return $value ? 'Male' : 'Female';
     }
-
 
 }

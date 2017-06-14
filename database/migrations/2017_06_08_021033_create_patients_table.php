@@ -24,6 +24,8 @@ class CreatePatientsTable extends Migration
             $table->longText('email');
             $table->string('referred_by')->nullable();
             $table->timestamps();
+
+            $table->foreign('lab_id')->references('id')->on('labs')->onDelete('cascade');
         });
     }
 

@@ -16,6 +16,8 @@ use Faker\Generator as Faker;
 $factory->define(App\Client::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'username' => $faker->userName,
+        'api_token' => str_random(255),
         'email' => ($faker->email),
         'number' => ($faker->randomNumber(5) . $faker->randomNumber(5)),
         'ip_registered' => ($faker->ipv4),

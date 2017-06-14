@@ -15,7 +15,6 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Patient::class, function (Faker $faker) {
     return [
-        'lab_id' => random_int(0, 50),
         'name' => $faker->name,
         'dob' => $faker->date(),
         'gender' => $faker->boolean,

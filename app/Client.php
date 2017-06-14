@@ -10,9 +10,19 @@ class Client extends Model
 {
     protected $fillable = ['name', 'email', 'number', 'ip_registered'];
 
+    public function patients()
+    {
+        return $this->hasManyThrough(Patient::class, Lab::class);
+    }
+
+    public function labs()
+    {
+        return $this->hasMany(Lab::class);
+    }
+
     public function licences()
     {
-        return $this->hasMany('App\Licence');
+        return $this->hasMany(Licence::class);
     }
 
     public function getEmailAttribute($value)
