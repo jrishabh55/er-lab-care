@@ -14,8 +14,15 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\PatientReport::class, function (Faker $faker) {
+    $paid = $faker->boolean;
+    $price = $faker->randomFloat(2, 200, 5000);
+    $discount = $faker->randomFloat(1, 0, $price);
+    $paid_amount = $paid ? $price : $faker->randomFloat(1, 1, $price - $discount);
+
     return [
-        'price' => $faker->randomFloat(2, 200, 5000),
-        'discount' => $faker->randomFloat(0, 10, 200)
+        'price' => $price,
+        'discount' => $discount,
+        'paid_amount' => $paid_amount,
+        'paid' => $paid,
     ];
 });

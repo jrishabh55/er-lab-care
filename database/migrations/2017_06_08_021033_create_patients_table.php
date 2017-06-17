@@ -17,11 +17,11 @@ class CreatePatientsTable extends Migration
             $table->increments('id');
             $table->integer('lab_id', false, true);
             $table->string('name');
+            $table->longText('email')->nullable();
             $table->date('dob');
             $table->boolean('gender');
             $table->longText('number');
             $table->longText('address')->nullable();
-            $table->longText('email');
             $table->string('referred_by')->nullable();
             $table->timestamps();
 

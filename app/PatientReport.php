@@ -10,6 +10,13 @@ class PatientReport extends Model
         'id', 'updated_at', 'patient_id'
     ];
 
+    protected $casts = [
+        'paid' => 'boolean',
+        'paid_amount' => 'float',
+        'price' => 'float',
+        'discount' => 'float',
+    ];
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);

@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use function encrypt;
 
 class Patient extends Model
 {
+    protected $fillable = [
+        'name', 'email', 'number', 'lab_id', 'gender', 'dob', 'address', 'referred_by',
+    ];
+
 
     protected $hidden = [
         'id', 'updated_at', 'client_id', 'lab_id'

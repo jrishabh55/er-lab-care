@@ -15,11 +15,6 @@ class Client extends Model
         return $this->hasManyThrough(Patient::class, Lab::class);
     }
 
-    public function labs()
-    {
-        return $this->hasMany(Lab::class);
-    }
-
     public function licences()
     {
         return $this->hasMany(Licence::class);
@@ -58,6 +53,16 @@ class Client extends Model
     public function setNumberAttribute($value)
     {
         return $this->attributes['number'] = encrypt($value);
+    }
+
+    public function ownLab(int $id)
+    {
+        return $this->labs()->where('id', $id)->count() > 0 ? true : false;
+    }
+
+    public function labs()
+    {
+        return $this->hasMany(Lab::class);
     }
 
 }

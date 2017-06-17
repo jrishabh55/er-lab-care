@@ -18,6 +18,8 @@ class CreatePatientReportsTable extends Migration
             $table->integer('patient_id', false, true);
             $table->float('price');
             $table->float('discount');
+            $table->float('paid_amount')->default(0);
+            $table->boolean('paid')->default(false);
             $table->string('reference_by')->nullable();
 
             $table->timestamps();

@@ -17,7 +17,7 @@ class PatientOwnershipMiddleware
     public function handle($request, Closure $next)
     {
 
-        $patient = ($request->route()->parameter('patient'));
+        $patient = ($request->route()->parameter('id'));
         $p = $request->user()->patients()->where('patients.id', $patient->id)->first() ?? false;
 
         if (!$p)
