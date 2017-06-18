@@ -26,7 +26,7 @@ class PatientCreateRequest extends FormRequest
         return [
             'name' => 'required|string,between:2,50',
             'email' => 'required|email',
-            'number' => 'required|integer|digits_between:8,12',
+            'number' => 'required|integer|unique:patients|digits_between:8,12',
             'lab_id' => 'required|integer',
             'gender' => 'required|boolean',
             'dob' => 'required|date',

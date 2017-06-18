@@ -18,7 +18,7 @@ $factory->define(App\Patient::class, function (Faker $faker) {
         'name' => $faker->name,
         'dob' => $faker->date(),
         'gender' => $faker->boolean,
-        'number' => $faker->phoneNumber,
+        'number' => $faker->numberBetween(10000000000, 1999999999),
         'email' => $faker->email,
     ];
 });

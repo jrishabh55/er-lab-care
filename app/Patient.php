@@ -12,7 +12,7 @@ class Patient extends Model
 
 
     protected $hidden = [
-        'id', 'updated_at', 'client_id', 'lab_id'
+        'updated_at', 'client_id', 'lab_id'
     ];
 
     public function lab()
@@ -32,23 +32,23 @@ class Patient extends Model
 
     public function setNumberAttribute($value)
     {
-        $this->attributes['number'] = encrypt($value);
+        $this->attributes['number'] = ($value);
     }
 
     public function setEmailAttribute($value)
     {
-        $this->attributes['email'] = encrypt($value);
+        $this->attributes['email'] = ($value);
     }
 
 
     public function getEmailAttribute($value)
     {
-        return decrypt($value);
+        return ($value);
     }
 
     public function getNumberAttribute($value)
     {
-        return decrypt($value);
+        return ($value);
     }
 
     public function getGenderAttribute($value)

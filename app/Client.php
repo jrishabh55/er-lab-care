@@ -3,12 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use function decrypt;
-use function encrypt;
 
 class Client extends Model
 {
-    protected $fillable = ['name', 'email', 'number', 'ip_registered'];
+    protected $fillable = ['name', 'username', 'email', 'number', 'ip_registered', 'api_token'];
 
     public function patients()
     {
@@ -22,17 +20,17 @@ class Client extends Model
 
     public function getEmailAttribute($value)
     {
-        return decrypt($value);
+        return ($value);
     }
 
     public function getNumberAttribute($value)
     {
-        return decrypt($value);
+        return ($value);
     }
 
     public function getIpRegisteredAttribute($value)
     {
-        return decrypt($value);
+        return ($value);
     }
 
     public function getGenderAttribute($value)
@@ -42,17 +40,17 @@ class Client extends Model
 
     public function setIpRegisteredAttribute($value)
     {
-        return $this->attributes['ip_registered'] = encrypt($value);
+        return $this->attributes['ip_registered'] = ($value);
     }
 
     public function setEmailAttribute($value)
     {
-        return $this->attributes['email'] = encrypt($value);
+        return $this->attributes['email'] = ($value);
     }
 
     public function setNumberAttribute($value)
     {
-        return $this->attributes['number'] = encrypt($value);
+        return $this->attributes['number'] = ($value);
     }
 
     public function ownLab(int $id)

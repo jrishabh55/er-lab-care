@@ -18,9 +18,9 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('username', 32)->unique();
             $table->string('api_token', 255)->unique();
-            $table->longText('email');
-            $table->longText('number');
-            $table->longText('ip_registered');
+            $table->string('email', 255)->unique();
+            $table->string('number', 12)->unique();
+            $table->ipAddress('ip_registered');
             $table->rememberToken();
             $table->timestamps();
         });
