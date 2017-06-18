@@ -24,14 +24,14 @@ class ClientController extends Controller
             $lab->name = $request->input('lab_name', 'Lab 1');
             $responce->labs()->save($lab);
 
-            return response()->api($responce->load('labs')->makeVisible('id'));
+            return response()->json($responce->load('labs'));
         } catch (\Exception $e) {
-            return response()->api($e->getMessage(), $e->getCode(), true);
+            return response()->json([$e->getMessage()], $e->getCode(), true);
         }
     }
 
     public function update(ClientUpdateRequest $request, Client $id)
     {
-        return response()->api($id->update($request->only('email', 'number', 'name')));
+        return response()->json($id->update($request->only('email', 'number', 'name')));
     }
 }

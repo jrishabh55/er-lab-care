@@ -12,7 +12,7 @@ class LabController extends Controller
 
     public function listAll(Request $request)
     {
-        return response()->api($request->user()->labs()->get());
+        return response()->json($request->user()->labs()->get());
     }
 
     public function reports(Request $request, Lab $id)
@@ -24,7 +24,7 @@ class LabController extends Controller
 
         $patients->get();
 
-        return response()->api($patients);
+        return response()->json($patients);
     }
 
 }
