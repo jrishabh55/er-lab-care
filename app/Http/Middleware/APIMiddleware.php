@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use function method_exists;
 use function response;
 
 class APIMiddleware
@@ -20,7 +21,7 @@ class APIMiddleware
 
         if ($request->wantsJson() || $request->acceptsJson()) {
 
-            return response()->api($response->getData() ?? $response->content(), $response->status(), $response->status() == 200 ? false : true);
+            return response()->api((method_exists($response, 'getData')) ? $response->getData() : $response->content(), $response->status(), $response->status() == 200 ? false : true);
         }
 
         return $response;
