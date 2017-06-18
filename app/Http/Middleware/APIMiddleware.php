@@ -18,8 +18,10 @@ class APIMiddleware
     {
         $response = $next($request);
 
-        if ($request->wantsJson() || $request->acceptsJson())
-            return response()->api($response->getData(), $response->status(), $response->status() == 200 ? false : true);
+        if ($request->wantsJson() || $request->acceptsJson()) {
+
+            return response()->api($response->getData() ?? $response->content(), $response->status(), $response->status() == 200 ? false : true);
+        }
 
         return $response;
     }
