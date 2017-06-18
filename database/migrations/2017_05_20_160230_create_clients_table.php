@@ -17,8 +17,8 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('username', 32)->unique();
-            $table->string('api_token', 255)->unique();
-            $table->string('email', 255)->unique();
+            $table->string('api_token', 128)->unique();
+            $table->string('email', 128)->unique();
             $table->string('number', 12)->unique();
             $table->ipAddress('ip_registered');
             $table->rememberToken();

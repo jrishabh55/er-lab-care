@@ -17,7 +17,7 @@ $factory->define(App\Client::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'username' => $faker->userName,
-        'api_token' => str_random(255),
+        'api_token' => str_random(128),
         'email' => ($faker->email),
         'number' => ($faker->randomNumber(5) . $faker->randomNumber(5)),
         'ip_registered' => ($faker->ipv4),
