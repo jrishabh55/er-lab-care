@@ -26,7 +26,7 @@ class ClientController extends Controller
 
             return response()->json($responce->load('labs'));
         } catch (\Exception $e) {
-            return response()->json([$e->getMessage()], $e->getCode(), true);
+            return response()->json([$e->getMessage()], $e->getCode());
         }
     }
 
