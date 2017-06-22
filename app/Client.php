@@ -2,10 +2,20 @@
 
 namespace App;
 
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 
-class Client extends Model
+class Client extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
+
+    use Authenticatable, Authorizable, CanResetPassword, Notifiable;
+
     protected $fillable = ['name', 'username', 'email', 'number', 'ip_registered', 'api_token'];
 
     public function patients()
@@ -18,40 +28,40 @@ class Client extends Model
         return $this->hasMany(Licence::class);
     }
 
-    public function getEmailAttribute($value)
-    {
-        return ($value);
-    }
-
-    public function getNumberAttribute($value)
-    {
-        return ($value);
-    }
-
-    public function getIpRegisteredAttribute($value)
-    {
-        return ($value);
-    }
+//    public function getEmailAttribute($value)
+//    {
+//        return decrypt($value);
+//    }
+//
+//    public function getNumberAttribute($value)
+//    {
+//        return decrypt($value);
+//    }
+//
+//    public function getIpRegisteredAttribute($value)
+//    {
+//        return decrypt($value);
+//    }
 
     public function getGenderAttribute($value)
     {
         return $value ? 'Male' : 'Female';
     }
 
-    public function setIpRegisteredAttribute($value)
-    {
-        return $this->attributes['ip_registered'] = ($value);
-    }
-
-    public function setEmailAttribute($value)
-    {
-        return $this->attributes['email'] = ($value);
-    }
-
-    public function setNumberAttribute($value)
-    {
-        return $this->attributes['number'] = ($value);
-    }
+//    public function setIpRegisteredAttribute($value)
+//    {
+//        return $this->attributes['ip_registered'] = encrypt($value);
+//    }
+//
+//    public function setEmailAttribute($value)
+//    {
+//        return $this->attributes['email'] = encrypt($value);
+//    }
+//
+//    public function setNumberAttribute($value)
+//    {
+//        return $this->attributes['number'] = encrypt($value);
+//    }
 
     public function ownLab(int $id)
     {
@@ -62,5 +72,4 @@ class Client extends Model
     {
         return $this->hasMany(Lab::class);
     }
-
 }

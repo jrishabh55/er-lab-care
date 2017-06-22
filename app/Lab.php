@@ -10,6 +10,10 @@ class Lab extends Model
         'updated_at', 'client_id',
     ];
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function owner()
     {
         return $this->belongsTo(Client::class);

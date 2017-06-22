@@ -21,6 +21,7 @@ class CreatePatientReportsTable extends Migration
             $table->float('paid_amount')->default(0);
             $table->boolean('paid')->default(false);
             $table->string('reference_by')->nullable();
+            $table->boolean('printed')->default(false);
 
             $table->timestamps();
 

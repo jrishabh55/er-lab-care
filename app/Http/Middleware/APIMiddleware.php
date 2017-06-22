@@ -21,7 +21,7 @@ class APIMiddleware
 
         if ($request->wantsJson() || $request->acceptsJson()) {
 
-            return response()->api((method_exists($response, 'getData')) ? $response->getData() : $response->content(), $response->status(), $response->status() == 200 ? false : true);
+            return response()->api((method_exists($response, 'getData')) ? $response->getData() : $response->content(), 200, $response->status() == 200 ? false : true);
         }
 
         return $response;

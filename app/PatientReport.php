@@ -15,6 +15,7 @@ class PatientReport extends Model
         'paid_amount' => 'float',
         'price' => 'float',
         'discount' => 'float',
+        'printed' => 'boolean'
     ];
 
     public function patient()

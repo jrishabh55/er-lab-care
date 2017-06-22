@@ -27,7 +27,6 @@ class UserController extends Controller
         $licence->mac_address = $request->input('mac_address');
         $licence->longitude = $request->input('longitude');
         $licence->latitude = $request->input('latitude');
-
         $client->licences()->save($licence);
     }
 
