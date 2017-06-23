@@ -18,6 +18,8 @@ class Client extends Model implements AuthenticatableContract, AuthorizableContr
 
     protected $fillable = ['name', 'username', 'email', 'number', 'ip_registered', 'api_token'];
 
+    protected $hidden = ['id', 'api_token', 'ip_registered', 'remember_token', 'created_at', 'updated_at'];
+
     public function patients()
     {
         return $this->hasManyThrough(Patient::class, Lab::class);

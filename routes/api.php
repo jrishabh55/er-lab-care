@@ -24,6 +24,6 @@ Route::group([
     Route::group(['middleware' => 'lab_ownership'], function () {
         Route::get('labs/{id}/update', "LabController@update");
         Route::get('lab/{id}/reports', "LabController@reports");
-        Route::get('lab/{id}', "LabController@reports");
+        Route::get('lab/{id}', "LabController@view");
     });
 });

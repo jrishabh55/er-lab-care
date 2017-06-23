@@ -11,9 +11,10 @@ use function response;
 class LabController extends Controller
 {
 
-    public function view(Lab $id)
+    public function view(Request $request, Lab $id)
     {
-        return response()->json($id->load('owner'));
+        $d = $request->has('with_client') && $request->input('with_client') == (true or 'true') ? $id->load('owner') : $id;
+        return response()->json($id);
     }
 
     public function create(Request $request)
@@ -22,7 +23,10 @@ class LabController extends Controller
             'lab_name' => 'required|string|between:2,50',
         ]);
 
-        $lab = $request->user('client_api')->labs()->save(Lab::create(['name' => $request->input('name')]));
+        $lab = new Lab;
+        $lab->name = $request->input('lab_name');
+        $lab = $request->user('client_api')->labs()->save($lab);
+
         return response()->json($lab);
     }
 
@@ -43,11 +47,11 @@ class LabController extends Controller
     {
         $patients = $id->patients();
 
+
         if ($request->has('patient_limit'))
-            $patients->limit($request->input('patient_limit'));
+            $patients = $patients->limit($request->input('patient_limit'));
 
-
-        $patients->orderByDesc('patients.id')->with('reports.tests')->get();
+        $patients = $patients->orderByDesc('patients.id')->with('reports.tests')->get();
 
         return response()->json($patients);
     }
