@@ -12,6 +12,7 @@ class ClientSeeder extends Seeder
     public function run()
     {
         factory(App\Client::class, 20)->create()->each(function ($client) {
+            $client->licences()->saveMany(factory(App\Licence::class, 10)->make());
             for ($i = 1; $i <= random_int(1, 4); $i++) {
                 $lab = $client->labs()->save(factory(App\Lab::class)->make());
                 for ($j = 1; $j <= random_int(0, 5); $i++) {

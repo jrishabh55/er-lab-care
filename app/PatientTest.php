@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property  test_id
+ * @property  price
+ * @property  value
+ */
 class PatientTest extends Model
 {
     protected $hidden = [

@@ -18,11 +18,12 @@ class CreateLicencesTable extends Migration
             $table->integer('client_id', false, true);
             $table->integer('product_id', false, true);
             $table->integer('order_id', false, true);
-            $table->longText('mac_address');
-            $table->longText('hdd_id');
-            $table->longText('device_id');
-            $table->longText('longitude');
-            $table->longText('latitude');
+            $table->boolean('active')->default(false);
+            $table->text('mac_address');
+            $table->text('hdd_id');
+            $table->text('device_id');
+            $table->text('longitude');
+            $table->text('latitude');
             $table->text('value');
             $table->timestamps();
 

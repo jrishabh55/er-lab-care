@@ -13,7 +13,7 @@ class LabController extends Controller
 
     public function view(Request $request, Lab $id)
     {
-        $d = $request->has('with_client') && $request->input('with_client') == (true or 'true') ? $id->load('owner') : $id;
+        $id = $request->has('with_owner') && $request->input('with_owner') == true ? $id->load('owner') : $id;
         return response()->json($id);
     }
 

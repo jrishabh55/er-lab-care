@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string("currency");
             $table->longText("full_file");
             $table->longText("trial_file");
+            $table->string('hash', 256)->unique();
 
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use function bcrypt;
 
 class Client extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
@@ -25,9 +26,9 @@ class Client extends Model implements AuthenticatableContract, AuthorizableContr
         return $this->hasManyThrough(Patient::class, Lab::class);
     }
 
-    public function licences()
+    public function getGenderAttribute($value)
     {
-        return $this->hasMany(Licence::class);
+        return $value ? 'Male' : 'Female';
     }
 
 //    public function getEmailAttribute($value)
@@ -45,9 +46,9 @@ class Client extends Model implements AuthenticatableContract, AuthorizableContr
 //        return decrypt($value);
 //    }
 
-    public function getGenderAttribute($value)
+    public function setPasswordAttribute($value)
     {
-        return $value ? 'Male' : 'Female';
+        $this->attributes['password'] = bcrypt($value);
     }
 
 //    public function setIpRegisteredAttribute($value)
@@ -73,5 +74,20 @@ class Client extends Model implements AuthenticatableContract, AuthorizableContr
     public function labs()
     {
         return $this->hasMany(Lab::class);
+    }
+
+    public function hasFreeLicences()
+    {
+        return $this->licences()->where('active', false)->count() > 0;
+    }
+
+    public function licences()
+    {
+        return $this->hasMany(Licence::class);
+    }
+
+    public function getFreeLicence()
+    {
+        return $this->licences()->where('active', false)->first();
     }
 }
