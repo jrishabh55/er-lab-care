@@ -16,8 +16,13 @@ Auth::routes();
 Route::get('/', function () {
     return redirect('/admin/dashboard');
 });
-Route::get('home', function () {
-    return redirect('/admin/dashboard');
+Route::group([
+    'prefix' => 'orders'
+], function () {
+    Route::get('create', "OrderController@create");
+    Route::post('create', "OrderController@createHandle");
+    Route::get('invoice/{id}', "InvoiceController@view");
+    Route::post('invoice/{id}', "InvoiceController@view");
 });
 
 Route::group([

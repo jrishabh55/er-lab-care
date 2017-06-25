@@ -22,6 +22,11 @@ class Order extends Model
         }
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);

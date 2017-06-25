@@ -19,12 +19,11 @@ class CreateLicencesTable extends Migration
             $table->integer('product_id', false, true);
             $table->integer('order_id', false, true);
             $table->boolean('active')->default(false);
-            $table->text('mac_address');
-            $table->text('hdd_id');
-            $table->text('device_id');
-            $table->text('longitude');
-            $table->text('latitude');
-            $table->text('value');
+            $table->string('mac_address', 20)->default('00:00:00:00:00:00');
+            $table->text('hdd_id', 20)->default('00.00.00.00.00.00');
+            $table->string('longitude')->default('0000');
+            $table->string('latitude')->default('0000');
+            $table->string('key', 30);
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

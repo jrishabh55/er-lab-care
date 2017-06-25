@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('promotion_id')->nullable();
             $table->float('amount');
+            $table->float('discount');
             $table->enum('payment_type', [0, 1])->default(1);
 
             $table->timestamps();
