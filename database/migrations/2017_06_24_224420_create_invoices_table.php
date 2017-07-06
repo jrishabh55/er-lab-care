@@ -17,11 +17,11 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->float('amount');
-            $table->float('discount');
+            $table->float('discount')->default(0);
             $table->boolean('paid')->default(false);
             $table->float('paid_amount')->default(0);
             $table->date('paid_date')->nullable();
-            $table->string('transaction_id', 255);
+            $table->string('transaction_id', 255)->nullable();
             $table->timestamps();
         });
     }

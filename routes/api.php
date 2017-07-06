@@ -26,4 +26,15 @@ Route::group([
         Route::get('lab/{id}/reports', "LabController@reports");
         Route::get('lab/{id}', "LabController@view");
     });
+
+    Route::get('licence/{id}/get', "LicenceController@get");
+    Route::group([
+        'middleware' => 'licence_owner',
+        'prefix' => 'licence',
+    ], function () {
+        Route::get('{licence}/get', 'LicenceController@getDetails');
+        Route::get('{licence}/use', 'LicenceController@assign');
+        Route::get('{licence}/use', 'LicenceController@assign');
+    });
+
 });

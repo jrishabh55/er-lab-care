@@ -20,7 +20,7 @@ class CreateLicencesTable extends Migration
             $table->integer('order_id', false, true);
             $table->boolean('active')->default(false);
             $table->string('mac_address', 20)->default('00:00:00:00:00:00');
-            $table->text('hdd_id', 20)->default('00.00.00.00.00.00');
+            $table->text('hdd_id')->nullable();
             $table->string('longitude')->default('0000');
             $table->string('latitude')->default('0000');
             $table->string('key', 30);

@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->longText("full_file");
             $table->longText("trial_file");
             $table->string('hash', 256)->unique();
+            $table->boolean('active')->default(true);
 
             $table->timestamps();
         });

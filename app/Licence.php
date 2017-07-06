@@ -9,6 +9,11 @@ class Licence extends Model
 {
     protected $fillable = [];
 
+    public function getRouteKey()
+    {
+        return 'key';
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);

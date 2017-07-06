@@ -15,8 +15,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Order::class, function (Faker $faker) {
     return [
-        "client_id" => random_int(1, 20),
-        "product_id" => 1,
+        "product_id" => random_int(1, 20),
         "promotion_id" => 0,
         "amount" => 10000,
     ];

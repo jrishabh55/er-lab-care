@@ -19,7 +19,7 @@ $factory->define(App\Client::class, function (Faker $faker) {
         'username' => $faker->userName,
         'api_token' => str_random(128),
         'email' => ($faker->email),
-        'password' => ($faker->password()),
+        'password' => 'password',
         'number' => ($faker->randomNumber(5) . $faker->randomNumber(5)),
         'ip_registered' => ($faker->ipv4),
     ];

@@ -21,5 +21,6 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'currency' => $faker->currencyCode,
         'full_file' => '#',
         'trial_file' => '#',
+        'hash' => $faker->sha256,
     ];
 });

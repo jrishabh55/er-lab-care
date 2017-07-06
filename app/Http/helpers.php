@@ -1,6 +1,5 @@
 <?php
-function generateLicence(...$data)
+function generateLicence($length = 30)
 {
-    $data = count($data) < 1 ? [] : $data;
-    return hash('sha256', json_encode($data));
+    return str_random($length);
 }

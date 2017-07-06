@@ -12,18 +12,27 @@
 */
 
 Auth::routes();
+Auth::guard('client_web')->loginUsingId(1);
 
 Route::get('/', function () {
     return redirect('/admin/dashboard');
 });
 Route::group([
-    'prefix' => 'orders'
+    'prefix' => 'orders',
+    'middleware' => 'auth:client_web'
 ], function () {
     Route::get('create', "OrderController@create");
     Route::post('create', "OrderController@createHandle");
-    Route::get('invoice/{id}', "InvoiceController@view");
-    Route::post('invoice/{id}', "InvoiceController@view");
 });
+Route::group([
+    'prefix' => 'payment',
+    'middleware' => ['auth:client_web', 'invoice_owner']
+], function () {
+    Route::get('invoice-{id}', "InvoiceController@view");
+    Route::post('invoice-{id}', "PaymentController@payment");
+    Route::get('invoice-{id}/response', "PaymentController@response");
+});
+Route::middleware('auth:client_web')->get('services', 'ServiceController@view');
 
 Route::group([
     'prefix' => 'admin',

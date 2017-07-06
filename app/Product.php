@@ -25,4 +25,9 @@ class Product extends Model
     {
         return $this->id == $promotion->product_id && Carbon::now()->diff($promotion->asDateTime('valid_till')) > 0;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
+    }
 }

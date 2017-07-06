@@ -10,6 +10,8 @@ class Order extends Model
 
     protected $casts = [
         'amount' => 'float',
+        'discount' => 'float',
+        'active' => 'boolean'
     ];
 
     function getPaymentTypeAttribute($value)
@@ -36,4 +38,5 @@ class Order extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
 }

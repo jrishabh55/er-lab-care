@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
-use function response;
+use function redirect;
 
 class OrderController extends Controller
 {
-    public function create(Request $request)
+    public function create()
     {
 //        $user = $request->user('client_web');
+        $products = Product::active()->get();
+        return view('order.products', ['products' => $products]);
 
     }
 
@@ -18,14 +22,23 @@ class OrderController extends Controller
     {
         $user = $request->user('client_web');
 
-        $order = new Order;
-        $order->product_id = $request->input('product_id');
-        $order->amount = $request->input('amount');
-        $order->discount = $request->input('discount');
-        $order->payment_type = 1;
-        $user->orders()->save($order);
+        $product = Product::findOrFail($request->input('product_id', 0));
 
-        return response('order_made');
+        $order = new Order;
+        $order->product_id = $product->id;
+        $order->amount = $product->price;
+//        $order->discount = $request->input('discount');
+//        $order->payment_type = 1;
+        /** @var Order $order */
+        $order = $user->orders()->save($order);
+        $invoice = new Invoice;
+        $invoice->amount = $order->amount;
+        if ($order->discount > 0)
+            $invoice->discount = $order->discount;
+
+        $order->invoices()->save($invoice);
+
+        return redirect()->action('InvoiceController@view', $order->invoices()->firstOrFail()->id);
     }
 
 }

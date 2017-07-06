@@ -17,12 +17,12 @@ $factory->define(App\Licence::class, function (Faker $faker) {
     return [
         'client_id' => random_int(1, 20),
         'product_id' => random_int(1, 20),
-        'order_id' => random_int(1, 20),
+//        'order_id' => random_int(1, 20),
         'mac_address' => ($faker->macAddress),
         'hdd_id' => ($faker->macPlatformToken),
-        'device_id' => ($faker->macPlatformToken),
+//        'device_id' => ($faker->macPlatformToken),
         'longitude' => ($faker->longitude),
         'latitude' => ($faker->latitude),
-        'value' => generateLicence($faker->ipv4, $faker->ipv6),
+        'key' => generateLicence(),
     ];
 });
