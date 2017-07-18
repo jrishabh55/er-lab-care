@@ -37,7 +37,11 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    &nbsp;@if(Auth::check())
+                        <li><a href="{{ action('ServiceController@view') }}">Services</a></li>
+                        <li><a href="{{ action('OrderController@create') }}">New order</a></li>
+                        <li><a href="{{ action('InvoiceController@list') }}">Invoice</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

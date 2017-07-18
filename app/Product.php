@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $appends = [
-        'value'
+        'full_price'
     ];
 
     public function promotions()
@@ -16,9 +16,9 @@ class Product extends Model
         return $this->hasMany(Promotion::class);
     }
 
-    public function getValueAttribute()
+    public function getFullPriceAttribute()
     {
-        return $this->price . " " . $this->currecny;
+        return $this->price . " " . $this->currency;
     }
 
     public function isApplicable(Promotion $promotion)

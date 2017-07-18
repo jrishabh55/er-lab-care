@@ -12,35 +12,26 @@
 */
 
 Auth::routes();
-Auth::guard('client_web')->loginUsingId(1);
+//Auth::guard('client_web')->loginUsingId(1);
 
-Route::get('/', function () {
-    return redirect('/admin/dashboard');
-});
-Route::group([
-    'prefix' => 'orders',
-    'middleware' => 'auth:client_web'
-], function () {
-    Route::get('create', "OrderController@create");
-    Route::post('create', "OrderController@createHandle");
-});
-Route::group([
-    'prefix' => 'payment',
-    'middleware' => ['auth:client_web', 'invoice_owner']
-], function () {
-    Route::get('invoice-{id}', "InvoiceController@view");
-    Route::post('invoice-{id}', "PaymentController@payment");
-    Route::get('invoice-{id}/response', "PaymentController@response");
-});
-Route::middleware('auth:client_web')->get('services', 'ServiceController@view');
+Route::post('login/client', "Auth\LoginController@clientLogin")->name('login::client');
 
-Route::group([
-    'prefix' => 'admin',
-    'as' => 'admin::',
-    'middleware' => 'auth'
-], function () {
-    Route::get('dashboard', 'Admin\DashboardController@dashboard');
-    Route::get('clients', 'Admin\ClientController@show');
-    Route::get('orders', 'Admin\OrderController@show');
-    Route::get('products', 'Admin\ProductController@show');
+Route::middleware('auth:client_web')->group(function () {
+
+    Route::get('/', "DashboardController@index");
+
+    Route::prefix('order')->group(function () {
+        Route::get('create/{id?}', "OrderController@create");
+        Route::post('create', "OrderController@createHandle");
+    });
+
+    Route::get('payment/invoices', 'InvoiceController@list');
+    Route::prefix('payment')->middleware('invoice_owner')->group(function () {
+        Route::get('invoice-{id}', "InvoiceController@view");
+        Route::post('invoice-{id}', "PaymentController@payment");
+        Route::get('invoice-{id}/response', "PaymentController@response");
+    });
+
+    Route::get('services', 'ServiceController@view');
 });
+

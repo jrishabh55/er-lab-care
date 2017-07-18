@@ -5,16 +5,36 @@ namespace App\Http\Controllers;
 use App\Invoice;
 use App\Order;
 use App\Product;
+use App\Promotion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use function abort;
 use function redirect;
 
 class OrderController extends Controller
 {
-    public function create()
+    public function create(Request $request, Product $id = null)
     {
-//        $user = $request->user('client_web');
-        $products = Product::active()->get();
-        return view('order.products', ['products' => $products]);
+        if ($id instanceof Product) {
+            if (!$id->active) {
+                abort(404);
+            }
+            $data = ['product' => $id];
+            $error = [];
+            if ($request->has('promotion')) {
+                $promotion = Promotion::where('promotion', $request->input('promotion'))->first();
+
+                if ($promotion instanceof Promotion) {
+                    $data['promotion'] = $promotion;
+                } else {
+                    $error['promotion'] = 'Promotion doesn\'t exists';
+                }
+            }
+            return view('order.new', $data)->withErrors($error);
+        } else {
+            $products = Product::active()->get();
+            return view('order.products', ['products' => $products]);
+        }
 
     }
 
@@ -27,12 +47,11 @@ class OrderController extends Controller
         $order = new Order;
         $order->product_id = $product->id;
         $order->amount = $product->price;
-//        $order->discount = $request->input('discount');
-//        $order->payment_type = 1;
-        /** @var Order $order */
         $order = $user->orders()->save($order);
+
         $invoice = new Invoice;
         $invoice->amount = $order->amount;
+        $invoice->due_date = Carbon::now();
         if ($order->discount > 0)
             $invoice->discount = $order->discount;
 

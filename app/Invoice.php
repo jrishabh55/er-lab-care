@@ -4,7 +4,9 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use function explode;
 use function is_null;
+use function sprintf;
 
 class Invoice extends Model
 {
@@ -13,10 +15,11 @@ class Invoice extends Model
         'amount' => 'float',
         'paid' => 'boolean',
         'paid_amount' => 'float',
-        'paid_date' => 'date'
+        'paid_date' => 'date',
+        'due_date' => 'date',
     ];
 
-    protected $appends = ['owner'];
+    protected $appends = ['owner', 'due'];
 
     public function pay(String $transaction_id = null, float $amount = null)
     {
@@ -37,6 +40,11 @@ class Invoice extends Model
         return !$this->paid;
     }
 
+    public function isPaid()
+    {
+        return $this->paid;
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class);
@@ -50,5 +58,20 @@ class Invoice extends Model
     public function owner()
     {
         return $this->order->client;
+    }
+
+    public function getIdAttribute($value)
+    {
+        return sprintf("%04d", $value);
+    }
+
+    public function getDueDateAttribute($value)
+    {
+        return explode(' ', $value)[0];
+    }
+
+    public function getDueAttribute()
+    {
+        return $this->amount - $this->due_amount;
     }
 }

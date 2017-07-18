@@ -33,8 +33,8 @@ Route::group([
         'prefix' => 'licence',
     ], function () {
         Route::get('{licence}/get', 'LicenceController@getDetails');
-        Route::get('{licence}/use', 'LicenceController@assign');
-        Route::get('{licence}/use', 'LicenceController@assign');
+        Route::post('{licence}/use', 'LicenceController@assign');
+        Route::get('{licence}/using-check', "LicenceController@assign");
     });
 
 });

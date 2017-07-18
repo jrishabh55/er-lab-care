@@ -21,6 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->boolean('paid')->default(false);
             $table->float('paid_amount')->default(0);
             $table->date('paid_date')->nullable();
+            $table->date('due_date')->nullable();
             $table->string('transaction_id', 255)->nullable();
             $table->timestamps();
         });
